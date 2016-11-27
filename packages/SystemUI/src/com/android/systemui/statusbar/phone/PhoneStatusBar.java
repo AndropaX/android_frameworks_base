@@ -434,6 +434,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     // DT2L camera vibration config
     private int mDt2lCameraVibrateConfig;
 
+    private int mQsLayoutColumns;
+
     // settings
     private QSPanel mQSPanel;
 
@@ -629,18 +631,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.BATTERY_SAVER_MODE_COLOR),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.QS_ROWS_PORTRAIT),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.QS_COLUMNS_PORTRAIT),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.QS_ROWS_LANDSCAPE),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.QS_COLUMNS_LANDSCAPE),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
             		Settings.System.STATUS_BAR_RR_LOGO_COLOR),
             		false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -680,6 +670,15 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.NAVBAR_BUTTON_COLOR),
                     false, this, UserHandle.USER_ALL);
+           resolver.registerContentObserver(Settings.System.getUriFor(
+                  Settings.System.QS_LAYOUT_COLUMNS),
+                  false, this, UserHandle.USER_ALL);
+           resolver.registerContentObserver(Settings.System.getUriFor(
+                  Settings.System.QS_ROWS_PORTRAIT),
+                  false, this, UserHandle.USER_ALL);
+           resolver.registerContentObserver(Settings.System.getUriFor(
+                  Settings.System.QS_ROWS_LANDSCAPE),
+                  false, this, UserHandle.USER_ALL);
 		    update();
         }
 
@@ -699,7 +698,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                             mContext.getContentResolver(),
                             Settings.System.SHOW_FOURG,
                             0, UserHandle.USER_CURRENT) == 1;
-                        	mNetworkController.onConfigurationChanged();
+                    mNetworkController.onConfigurationChanged();
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.SHOW_THREEG))) {
                     mShow3G = Settings.System.getIntForUser(
@@ -732,13 +731,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
            } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.QS_ROWS_PORTRAIT))
                     || uri.equals(Settings.System.getUriFor(
-                    Settings.System.QS_COLUMNS_PORTRAIT))) {
-                	updateQSRowsColumnsPortrait();
-           } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.QS_ROWS_LANDSCAPE))
-                    || uri.equals(Settings.System.getUriFor(
-                    Settings.System.QS_COLUMNS_LANDSCAPE))) {
-                	updateQSRowsColumnsLandscape();
+                    Settings.System.QS_ROWS_LANDSCAPE))) {
+                    updateResources();
            } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_SHOW_TICKER))) {
                 mTickerEnabled = Settings.System.getIntForUser(
@@ -764,8 +758,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
            } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.NAVBAR_BUTTON_COLOR))) {
                     mNavigationController.updateNavbarOverlay(mContext.getResources());
-           } 
-            update();
+           }
+           update();
         }
 
         @Override
@@ -839,6 +833,13 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
             mDt2lCameraVibrateConfig = Settings.System.getIntForUser(resolver,
                     Settings.System.DT2L_CAMERA_VIBRATE_CONFIG, 1, mCurrentUserId);
+
+            mQsLayoutColumns = Settings.System.getIntForUser(resolver,
+                    Settings.System.QS_LAYOUT_COLUMNS, 3, mCurrentUserId);
+
+            if (mHeader != null) {
+                mHeader.updateSettings();
+            }
 
             int sidebarPosition = Settings.System.getInt(
                     resolver, Settings.System.APP_SIDEBAR_POSITION, AppSidebar.SIDEBAR_POSITION_LEFT);
@@ -2980,20 +2981,6 @@ mWeatherTempSize, mWeatherTempFontStyle, mWeatherTempColor);
         }
         mReportRejectedTouch.setVisibility(mState == StatusBarState.KEYGUARD
                 && mFalsingManager.isReportingEnabled() ? View.VISIBLE : View.INVISIBLE);
-    }
-
-    private void updateQSRowsColumnsPortrait() {
-        Resources res = mContext.getResources();
-        if (res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            updateResources();
-        }
-    }
-
-    private void updateQSRowsColumnsLandscape() {
-        Resources res = mContext.getResources();
-        if (res.getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            updateResources();
-        }
     }
 
     protected int adjustDisableFlags(int state) {

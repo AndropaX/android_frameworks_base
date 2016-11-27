@@ -3833,6 +3833,26 @@ public static final String PHONE_BLACKLIST_REGEX_ENABLED = "phone_blacklist_rege
          */
         public static final String SCREENSHOT_DELAY = "screenshot_delay";
 
+        /**
+         * Quick Settings number of columns
+         * @hide
+         */
+        public static final String QS_LAYOUT_COLUMNS = "qs_layout_columns";
+
+        /**
+         * Number of rows used for the Quick Settings (portrait)
+         *
+         * @hide
+         */
+        public static final String QS_ROWS_PORTRAIT = "qs_rows_portrait";
+
+        /**
+         * Number of rows used for the Quick Settings (landscape)
+         *
+         * @hide
+         */
+        public static final String QS_ROWS_LANDSCAPE = "qs_rows_landscape";
+
 		/**
          * Statusbar RR logo color setting
          * @hide
@@ -4253,6 +4273,12 @@ public static final String PHONE_BLACKLIST_REGEX_ENABLED = "phone_blacklist_rege
         public static final String STATUSBAR_BATTERY_BAR = "statusbar_battery_bar";
 
         /**
+         * Status Bar Colors Switch
+         * @hide
+         */
+        public static final String STATUSBAR_COLOR_SWITCH = "statusbar_color_switch";
+
+        /**
          * @hide
          */
         public static final String STATUSBAR_BATTERY_BAR_COLOR = "statusbar_battery_bar_color";
@@ -4261,11 +4287,47 @@ public static final String PHONE_BLACKLIST_REGEX_ENABLED = "phone_blacklist_rege
          * @hide
          */
         public static final String STATUSBAR_BATTERY_BAR_THICKNESS = "statusbar_battery_bar_thickness";
+        
+        /**
+         * @hide
+         */       
+        public static final String STATUSBAR_BATTERY_BAR_CHARGING_COLOR = "statusbar_battery_bar_charging_color";
+
+
+
+        /**
+         * @hide
+         */
+        public static final String STATUSBAR_BATTERY_BAR_BATTERY_LOW_COLOR_WARNING =
+                "statusbar_battery_bar_battery_low_color_warning";
+
+        /**
+         * @hide
+         */
+        public static final String STATUSBAR_BATTERY_BAR_HIGH_COLOR =
+                "statusbar_battery_bar_high_color";
+
+        /**
+         * @hide
+         */
+        public static final String STATUSBAR_BATTERY_BAR_LOW_COLOR =
+                "statusbar_battery_bar_low_color";
+
+        /**
+         * @hide
+         */
+        public static final String STATUSBAR_BATTERY_BAR_USE_GRADIENT_COLOR =
+                "statusbar_battery_bar_use_gradient_color";
 
         /**
          * @hide
          */
         public static final String STATUSBAR_BATTERY_BAR_STYLE = "statusbar_battery_bar_style";
+
+        /**
+         * @hide
+         */
+       public static final String STATUSBAR_BATTERY_BAR_ANIMATE = "statusbar_battery_bar_animate";
 
         /**
          * Position of date
@@ -4293,11 +4355,6 @@ public static final String PHONE_BLACKLIST_REGEX_ENABLED = "phone_blacklist_rege
          * @hide
          */
         public static final String RR_OTA_FAB = "rr_ota_fab";
-
-        /**
-         * @hide
-         */
-        public static final String STATUSBAR_BATTERY_BAR_ANIMATE = "statusbar_battery_bar_animate";
 
         /**
          * @hide
@@ -4410,8 +4467,8 @@ public static final String PHONE_BLACKLIST_REGEX_ENABLED = "phone_blacklist_rege
          *
          * @hide
          */
+
         public static final String LOCK_DATE_FONTS = "lock_date_fonts";
-        
         /**
          * Change font size for the system lockscreen clock widget
          *
@@ -4887,27 +4944,6 @@ public static final String PHONE_BLACKLIST_REGEX_ENABLED = "phone_blacklist_rege
          * @hide
          */
         public static final String QS_STROKE_DASH_GAP = "qs_stroke_dash_gap";
-
-        /**
-         * Number of rows used for the Quick Settings (portrait)
-         *
-         * @hide
-         */
-        public static final String QS_ROWS_PORTRAIT = "qs_rows_portrait";
-
-        /**
-         * Number of columns used for the Quick Settings (portrait)
-         *
-         * @hide
-         */
-        public static final String QS_COLUMNS_PORTRAIT = "qs_columns_portrait";
-
-        /**
-         * Number of rows used for the Quick Settings (landscape)
-         *
-         * @hide
-         */
-        public static final String QS_ROWS_LANDSCAPE = "qs_rows_landscape";
 
         /**
          * Change the color of the lockscreen owner's info text
@@ -8408,6 +8444,7 @@ public static final String PHONE_BLACKLIST_REGEX_ENABLED = "phone_blacklist_rege
          */
 
         public static final String QS_DATA_ADVANCED = "qs_data_advanced";
+
 
         /**
          * Whether or not the automatic storage manager is enabled and should run on the device.
